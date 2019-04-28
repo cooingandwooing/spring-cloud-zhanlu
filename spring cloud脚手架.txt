@@ -1,6 +1,8 @@
 https://blog.csdn.net/forezp/article/details/70148833   史上最简单的 SpringCloud 教程 | 终章
 http://www.ityouknow.com/spring-cloud.html 纯洁的微笑
 
+https://yq.aliyun.com/articles/623424
+
 
 面向服务的架构（SOA）是一个组件模型，它将应用程序的不同功能单元（称为服务）进行拆分，并通过这些服务之间定义良好的接口和契约联系起来。
 
