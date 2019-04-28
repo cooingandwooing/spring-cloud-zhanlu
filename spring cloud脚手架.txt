@@ -1,50 +1,49 @@
-�������ļܹ���SOA����һ�����ģ�ͣ�����Ӧ�ó���Ĳ�ͬ���ܵ�Ԫ����Ϊ���񣩽��в�֣���ͨ����Щ����֮�䶨�����õĽӿں���Լ��ϵ������
-
-Druid��ʲô  java��õ����ݿ����ӳ�
-
-Ȼ�����鲻�����ǲ��Ȼ��������ô�򵥣������кܶ�����Ҫ���������ĳһ̨�����������΢������Ҫ�ر� �����ǹز�����ô���أ����ܾ���������һ�����⣬��΢�������ɱ���ˣ�����zuul������ת����ʱ����ָ�����ߵ�΢���񣬵��±���connection time out�������ĵ������ò顣���˺ܶ����ϣ�������kill -9��ɱ���̵����⡣
-
-�Ҹо�SpringCloud �Ŀ�����Ҫ�뿪����ˬ��Ӧ�������˽����ά��֪ʶ��ǿ�ҽ���SpringCloud ���Jenkinsһ��ʹ�ã������Ľ���Ͽ�����Jenkins+Ansible+Gitlab�Զ������� �Ŀγ̣�������Ա�˽��˽� ���кô��ġ�
-
-��ͬ��˵��jenkins��һ��������Ը���gitlab �ύ��hashֵ�Զ��Ĵ�� ���ˡ�
-
-�Բ������̫ˬ�ˣ��Ժ����� �������ĵ���ô�� ��ѧһ�㼼������������������°빦������
-
-��ǰ�����������������µ�Ҫ��������ֻҪ��jenkins�����һ�£�Ȼ��Ϳ���ȥ�Ȳ��ˡ�
+https://blog.csdn.net/forezp/article/details/70148833   史上最简单的 SpringCloud 教程 | 终章
+http://www.ityouknow.com/spring-cloud.html 纯洁的微笑
 
 
-K8S��Jenkins+gitlabCI+docker �������һ�װɡ�
+面向服务的架构（SOA）是一个组件模型，它将应用程序的不同功能单元（称为服务）进行拆分，并通过这些服务之间定义良好的接口和契约联系起来。
 
-��΢������ǰѽӿڲ�ֳɸ�����Ŀ�� �뷨�����á�Ҳ�ܼ򵥰������ǲ�ְ����� ΢�����ǲ�ֽӿڣ��뷨Ҳ���򵥣�����������ƣ����˽�һ�°��� ��Ȼ�����鲻�����ǲ��Ȼ��������ô�򵥣������кܶ�����Ҫ���������ĳһ̨�����������΢������Ҫ�ر� �����ǹز�����ô���أ����ܾ���������һ�����⣬��΢�������ɱ���ˣ�����zuul������ת����ʱ����ָ�����ߵ�΢���񣬵��±���connection time out�������ĵ������ò顣���˺ܶ����ϣ�������kill -9��ɱ���̵����⡣ �������Ҫ�˽�һ������ͣ������������ kill -9, �� shutdownhook ������ͣ��������ע���ǿ��ҲҪ����̬�����߲����� ����������˵����Ҳ��ѧϰDevops����ܲ��������ǽ����˽�����������˼�뻹����������ά�������㵥���Ĳ���jar�������ʹ�࣬���ϡ����ߺܺ�ѧ������Ŭ�������ǰ;������
+Druid是什么  java最好的数据库连接池
+
+然后事情不仅仅是拆分然后上线这么简单，还是有很多问题要解决，比如某一台服务器上面的微服务想要关闭 ，但是关不掉怎么办呢？上周就遇到这样一个问题，把微服务进程杀掉了，可是zuul在请求转发的时候还是指向下线的微服务，导致报错connection time out。而且文档还不好查。查了很多资料，可能是kill -9的杀进程的问题。
+
+我感觉SpringCloud 的开发者要想开发的爽，应该稍许了解点运维的知识。强烈建议SpringCloud 配合Jenkins一起使用，最近在慕课上看到了Jenkins+Ansible+Gitlab自动化部署 的课程，开发人员了解了解 是有好处的。
+
+听同事说，jenkins的一个插件可以根据gitlab 提交的hash值自动的打包 回退。
+
+卧槽真的是太爽了，以后升级 还用提心吊胆么？ 多学一点技术，可以让你办事情事半功倍啊。
+
+以前你升级生产环境害怕的要死，现在只要在jenkins上面点一下，然后就可以去喝茶了。
+
+
+K8S，Jenkins+gitlabCI+docker 起码得有一套吧。
+
+“微服务就是把接口拆分成各个项目。 想法很美好。也很简单啊，就是拆分啊。” 微服务不是拆分接口，想法也不简单，领域驱动设计，得了解一下啊。 “然后事情不仅仅是拆分然后上线这么简单，还是有很多问题要解决，比如某一台服务器上面的微服务想要关闭 ，但是关不掉怎么办呢？上周就遇到这样一个问题，把微服务进程杀掉了，可是zuul在请求转发的时候还是指向下线的微服务，导致报错connection time out。而且文档还不好查。查了很多资料，可能是kill -9的杀进程的问题。 这个你需要了解一下优雅停机，别在线上 kill -9, 用 shutdownhook 做优雅停机，服务注册那块儿也要做动态的下线操作。 不过下文中说到你也在学习Devops，这很不错，还是建议了解下领域驱动思想还有容器化运维，否则你单纯的部署jar包，会很痛苦，以上。作者很好学，继续努力会很有前途，加油
 
 rabbitmq
 
-https://gitee.com/longveeshaw/SpringCloud �����淶
+https://gitee.com/longveeshaw/SpringCloud 命名规范
 
-https://springcloud.cc/spring-cloud-dalston.html#_spring_cloud_security springcloud�����ĵ�
+https://springcloud.cc/spring-cloud-dalston.html#_spring_cloud_security springcloud中文文档
 
-տ¶
+湛露
 
-shiro����security
-shiro���ø����������⣬�������֣�security������ԱȽ��Ѷ�����spring�Ļ����£�security�����Ը��á�Shiro�Ժܶ������Ŀ�ܼ����Ը��ã��ų����޷켯�ɡ�shiro����������ʹ����web�У������Թ������κ�Ӧ�û����С��ڼ�Ⱥ�ỰʱShiro����Ҫ��һ���ô������������ĻỰ�Ƕ����������ġ�Shiro�ṩ���������ʹ�������ǳ����㡣
-
-���ߣ�H_Man
-���ӣ�https://www.jianshu.com/p/658d8b28fb04
-��Դ������
-��������Ȩ���������У��κ���ʽ��ת�ض�����ϵ���߻����Ȩ��ע��������
+shiro还是security
+shiro配置更加容易理解，容易上手；security配置相对比较难懂。在spring的环境下，security整合性更好。Shiro对很多其他的框架兼容性更好，号称是无缝集成。shiro不仅仅可以使用在web中，它可以工作在任何应用环境中。在集群会话时Shiro最重要的一个好处或许就是它的会话是独立于容器的。Shiro提供的密码加密使用起来非常方便。
 
 
-https://wiselyman.iteye.com/blog/2379419   security����
+https://wiselyman.iteye.com/blog/2379419   security例子
 
-https://blog.csdn.net/u014401141/article/details/78687703  spring cloud֮��ȫ���ʣ��ˣ� *************�ص㿴һ��   ���ڴ�����������
+https://blog.csdn.net/u014401141/article/details/78687703  spring cloud之安全访问（八） *************重点看一下   有内存困扰问题解决
 
-https://blog.csdn.net/weihao_/article/details/82871099  SpringCloud΢����Ȩ�޿��ƣ�һ������
+https://blog.csdn.net/weihao_/article/details/82871099  SpringCloud微服务权限控制（一）概述
 
-https://www.jianshu.com/p/97f03fa21adb ǰ��˷���ķ���
+https://www.jianshu.com/p/97f03fa21adb 前后端分离的方案
 
-https://segmentfault.com/a/1190000017380308   �����΢����ܹ��ж���Դ��ǰ��ҳ��+��˽ӿڣ�����Ȩ�޿���
+https://segmentfault.com/a/1190000017380308   如何在微服务架构中对资源（前端页面+后端接口）进行权限控制
 
 
-https://blog.csdn.net/qq_33833327/article/details/83003604  spring cloud-ǰ�˿�������Ľ������,���õ���������zuul�����ز����������⣬һ������.https://blog.csdn.net/huaqiangu1123/article/details/78750979   https://blog.csdn.net/zhaokejin521/article/details/81007884
+https://blog.csdn.net/qq_33833327/article/details/83003604  spring cloud-前端跨域问题的解决方案,更好的做法是在zuul的网关层解决跨域问题，一劳永逸.https://blog.csdn.net/huaqiangu1123/article/details/78750979   https://blog.csdn.net/zhaokejin521/article/details/81007884
 
-https://gitee.com/longveeshaw/SpringCloud  ������spring cloud�ܹ�
+https://gitee.com/longveeshaw/SpringCloud  命名和spring cloud架构
